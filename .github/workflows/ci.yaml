@@ -72,7 +72,7 @@ jobs:
         envkey_SETTINGS_DB_HOST: ${{ secrets.SETTINGS_DB_HOST }}
         envkey_SETTINGS_DB_PORT: ${{ secrets.SETTINGS_DB_PORT }}
         envkey_SETTINGS_SECRET_KEY: ${{ secrets.SETTINGS_SECRET_KEY }}
-        directory: ${{ secrets.DJANGO_APP_NAME }}
+        directory: ${{ secrets.DJANGO_APP_NAME }}/
 
     - name: Deploy to VPS
       uses: easingthemes/ssh-deploy@main
@@ -91,4 +91,4 @@ jobs:
         USERNAME: ${{ secrets.VPS_USERNAME }}
         PORT: ${{ secrets.VPS_PORT }}
         KEY: ${{ secrets.VPS_SSH_KEY }}
-        script: ls ${{ secrets.VPS_APPS_BASE_PATH }}/django-deploy-github
+        script: ls ${{ secrets.VPS_APPS_BASE_PATH }}/${{ secrets.PROJECT_NAME}}

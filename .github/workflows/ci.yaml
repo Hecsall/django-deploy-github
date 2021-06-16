@@ -46,7 +46,10 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt
       
-      - name: Check Syntax
+      - name: Run Black auto-formatter
+        run: black .
+      
+      - name: Run Flake8 Linter
         run: pflake8 --count .
       
       - name: Run Migrations

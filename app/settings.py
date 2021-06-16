@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
+env = environ.Env(
+    SETTINGS_DEBUG=(bool, False),
+    SETTINGS_SECRET_KEY=(str, "somesecretkey123"),
+)  # set casting, default value
+environ.Env.read_env()  # reading .env file
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,11 +28,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-z)vwct@apyjq+)qm(0reggrpm=d!myg*s2k2a00eya22#^!)5_"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = env("SETTINGS_SECRET_KEY")
+DEBUG = env("SETTINGS_DEBUG")
 
 ALLOWED_HOSTS = []
 
@@ -91,11 +96,10 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv("DB_NAME"),
-            "USER": os.getenv("DB_USER"),
-            "PASSWORD": os.getenv("DB_PASSWORD"),
-            "HOST": os.getenv("DB_HOST"),
-            "PORT": os.getenv("DB_PORT"),
+            "NAME": env("SETTINGS_DB_NAME"),
+            "USER": env("SETTINGS_DB_USER"),
+            "HOST": env("SETTINGS_DB_HOST"),
+            "PORT": env("SETTINGS_DB_PORT"),
         }
     }
 

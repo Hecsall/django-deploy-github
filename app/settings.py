@@ -14,7 +14,10 @@ from pathlib import Path
 import os
 import environ
 
-env = environ.Env(SETTINGS_DEBUG=(bool, False))  # set casting, default value
+env = environ.Env(
+    SETTINGS_DEBUG=(bool, False),
+    SETTINGS_SECRET_KEY=(str, "somesecretkey123"),
+)  # set casting, default value
 environ.Env.read_env()  # reading .env file
 
 

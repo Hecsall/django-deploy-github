@@ -8,7 +8,6 @@ on:
   push:
     branches:
       - master
-      - develop
 
 jobs:
   health-check-job:
@@ -47,7 +46,7 @@ jobs:
         run: pip install -r requirements.txt
       
       - name: Check Syntax
-        run: pycodestyle --statistics .
+        run: pflake8 --count .
       
       - name: Run Migrations
         run: python manage.py migrate

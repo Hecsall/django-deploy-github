@@ -66,16 +66,13 @@ jobs:
     - name: Deploy to VPS
       uses: easingthemes/ssh-deploy@main
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
-        REMOTE_HOST: ${{ secrets.VPS_HOST }}
-        REMOTE_USER: ${{ secrets.VPS_USERNAME }}
-        REMOTE_PORT: ${{ secrets.VPS_PORT }}
+        SSH_PRIVATE_KEY: "${{ secrets.VPS_SSH_KEY }}"
+        REMOTE_HOST: "${{ secrets.VPS_HOST }}"
+        REMOTE_USER: "${{ secrets.VPS_USERNAME }}"
+        REMOTE_PORT: "${{ secrets.VPS_PORT }}"
         TARGET: "${{ secrets.VPS_APPS_BASE_PATH }}/django-github-deploy"
         # ARGS: "-rltgoDzvO"
-        EXCLUDE: "
-          /node_modules/,
-          .git/
-        "
+        EXCLUDE: "/node_modules/, .git/, .gitignore, .github/, .vscode/, /public/media/"
 
     - name: Executing remote command
       uses: appleboy/ssh-action@master

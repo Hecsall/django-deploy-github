@@ -72,7 +72,7 @@ jobs:
         envkey_SETTINGS_DB_HOST: ${{ secrets.SETTINGS_DB_HOST }}
         envkey_SETTINGS_DB_PORT: ${{ secrets.SETTINGS_DB_PORT }}
         envkey_SETTINGS_SECRET_KEY: ${{ secrets.SETTINGS_SECRET_KEY }}
-        github_workspace: ${{ env.GITHUB_WORKSPACE }}
+        github_workspace: ${{ github.workspace }}
         directory: ${{ secrets.DJANGO_APP_NAME }}
 
     - name: Deploy to VPS

@@ -63,6 +63,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Make envfile
+      uses: SpicyPizza/create-envfile@v1
+      with:
+        envkey_SETTINGS_DEBUG: ${{ secrets.SETTINGS_DEBUG }}
+        envkey_SETTINGS_DB_NAME: ${{ secrets.SETTINGS_DB_NAME }}
+        envkey_SETTINGS_DB_USER: ${{ secrets.SETTINGS_DB_USER }}
+        envkey_SETTINGS_DB_HOST: ${{ secrets.SETTINGS_DB_HOST }}
+        envkey_SETTINGS_DB_PORT: ${{ secrets.SETTINGS_DB_PORT }}
+        envkey_SETTINGS_SECRET_KEY: ${{ secrets.SETTINGS_SECRET_KEY }}
+        directory: ${{ DJANGO_APP_NAME }}
+
     - name: Deploy to VPS
       uses: easingthemes/ssh-deploy@main
       env:
@@ -70,8 +81,7 @@ jobs:
         REMOTE_HOST: "${{ secrets.VPS_HOST }}"
         REMOTE_USER: "${{ secrets.VPS_USERNAME }}"
         REMOTE_PORT: "${{ secrets.VPS_PORT }}"
-        TARGET: "${{ secrets.VPS_APPS_BASE_PATH }}/django-github-deploy"
-        # ARGS: "-rltgoDzvO"
+        TARGET: "${{ secrets.VPS_APPS_BASE_PATH }}/${{ secrets.PROJECT_NAME}}"
         EXCLUDE: "/node_modules/, .git/, .gitignore, .github/, .vscode/, /public/media/"
 
     - name: Executing remote command
@@ -81,4 +91,4 @@ jobs:
         USERNAME: ${{ secrets.VPS_USERNAME }}
         PORT: ${{ secrets.VPS_PORT }}
         KEY: ${{ secrets.VPS_SSH_KEY }}
-        script: ls ${{ secrets.VPS_APPS_BASE_PATH }}/django-github-deploy
+        script: ls ${{ secrets.VPS_APPS_BASE_PATH }}/django-deploy-github

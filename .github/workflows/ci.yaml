@@ -72,10 +72,7 @@ jobs:
         REMOTE_PORT: ${{ secrets.VPS_PORT }}
         TARGET: "${{ secrets.VPS_APPS_BASE_PATH }}/django-github-deploy"
         # ARGS: "-rltgoDzvO"
-        EXCLUDE: "
-          /node_modules/,
-          .git/
-        "
+        EXCLUDE: "/node_modules/, .git/"
 
     - name: Executing remote command
       uses: appleboy/ssh-action@master

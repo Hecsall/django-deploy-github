@@ -58,12 +58,15 @@ jobs:
           envkey_SETTINGS_SECRET_KEY: ${{ secrets.SETTINGS_SECRET_KEY }}
 
       - name: Run Flake8 Linter
-        run: pflake8 --count ./django
+        working-directory: ./django
+        run: pflake8 --count .
       
       - name: Run Migrations
-        run: cd django/ && python manage.py migrate
+        working-directory: ./django
+        run: python manage.py migrate
       
       - name: Run Test
+        working-directory: ./django
         run: cd django/ && python manage.py test
 
   deploy-job:
@@ -96,12 +99,3 @@ jobs:
         SOURCE: "django/"
         TARGET: "${{ secrets.VPS_APPS_BASE_PATH }}/${{ secrets.PROJECT_NAME}}"
         EXCLUDE: "/node_modules/, .git/, .gitignore, .github/, .vscode/, /public/media/"
-
-    - name: Executing remote command
-      uses: appleboy/ssh-action@master
-      with:
-        HOST: ${{ secrets.VPS_HOST }}
-        USERNAME: ${{ secrets.VPS_USERNAME }}
-        PORT: ${{ secrets.VPS_PORT }}
-        KEY: ${{ secrets.VPS_SSH_KEY }}
-        script: ls ${{ secrets.VPS_APPS_BASE_PATH }}/${{ secrets.PROJECT_NAME}}

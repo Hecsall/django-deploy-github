@@ -48,7 +48,7 @@ jobs:
       - name: Make envfile
         uses: SpicyPizza/create-envfile@master
         with:
-          directory: django/${{ secrets.DJANGO_APP_NAME }}
+          directory: django/${{ secrets.DJANGO_APP_NAME }}/settings
           # Environment Variables that will be exported in a .env file for Django
           envkey_SETTINGS_DEBUG: ${{ secrets.SETTINGS_DEBUG }}
           envkey_SETTINGS_DB_NAME: ${{ secrets.SETTINGS_DB_NAME }}
@@ -77,7 +77,7 @@ jobs:
     - name: Make envfile
       uses: SpicyPizza/create-envfile@master
       with:
-        directory: django/${{ secrets.DJANGO_APP_NAME }}
+        directory: django/${{ secrets.DJANGO_APP_NAME }}/settings
         # Environment Variables that will be exported in a .env file for Django
         envkey_SETTINGS_DEBUG: ${{ secrets.SETTINGS_DEBUG }}
         envkey_SETTINGS_DB_NAME: ${{ secrets.SETTINGS_DB_NAME }}

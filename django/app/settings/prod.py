@@ -8,7 +8,7 @@ env = environ.Env(
     SETTINGS_DEBUG=(bool, False),
     SETTINGS_SECRET_KEY=(str, "somesecretkey123"),
 )
-environ.Env.read_env(env.str("ENV_PATH", BASE_DIR / "/app/.env"))
+environ.Env.read_env()
 
 
 SECRET_KEY = env("SETTINGS_SECRET_KEY")

@@ -1,4 +1,4 @@
-from .base import *  # noqa: F401
+from .base import *  # noqa: F401 F403
 
 
 SECRET_KEY = "someFakeDevelopmentSecretKey1234"

@@ -67,7 +67,7 @@ jobs:
       
       - name: Run Test
         working-directory: ./django
-        run: cd django/ && python manage.py test
+        run: python manage.py test
 
   deploy-job:
     runs-on: ubuntu-latest

@@ -45,6 +45,18 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt
       
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@master
+        with:
+          directory: django/${{ secrets.DJANGO_APP_NAME }}
+          # Environment Variables that will be exported in a .env file for Django
+          envkey_SETTINGS_DEBUG: ${{ secrets.SETTINGS_DEBUG }}
+          envkey_SETTINGS_DB_NAME: ${{ secrets.SETTINGS_DB_NAME }}
+          envkey_SETTINGS_DB_USER: ${{ secrets.SETTINGS_DB_USER }}
+          envkey_SETTINGS_DB_HOST: ${{ secrets.SETTINGS_DB_HOST }}
+          envkey_SETTINGS_DB_PORT: ${{ secrets.SETTINGS_DB_PORT }}
+          envkey_SETTINGS_SECRET_KEY: ${{ secrets.SETTINGS_SECRET_KEY }}
+
       - name: Run Flake8 Linter
         run: pflake8 --count ./django
       

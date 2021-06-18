@@ -57,17 +57,14 @@ jobs:
           envkey_SETTINGS_DB_PORT: ${{ secrets.SETTINGS_DB_PORT }}
           envkey_SETTINGS_SECRET_KEY: ${{ secrets.SETTINGS_SECRET_KEY }}
 
-      - name: Enter django folder
-        run: cd django/
-      
       - name: Run Flake8 Linter
-        run: pflake8 --count .
+        run: pflake8 --count ./django
       
       - name: Run Migrations
-        run: python manage.py migrate
+        run: cd django/ && python manage.py migrate
       
       - name: Run Test
-        run: python manage.py test
+        run: cd django/ && python manage.py test
 
   deploy-job:
     runs-on: ubuntu-latest

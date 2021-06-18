@@ -46,12 +46,12 @@ pip install -r requirements.txt
 
 Run `black` formatter from your terminal to auto fix all "auto-fixable" issues inside python files.
 ```sh
-black --exclude=venv/ .
+black --exclude=django/venv/ .
 ```
 
 Test python files before pushing (if there are errors, the CI will fail and won't deploy anything).\
 *Note: we use `pflake8` because that will read flake8 configurations from the `pyproject.toml` file.*
 ```sh
 # From the root folder of the project
-pflake8 --exclude=venv/ --count .
+pflake8 --exclude=django/venv/ --count .
 ```
